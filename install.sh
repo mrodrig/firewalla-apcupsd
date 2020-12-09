@@ -2,12 +2,19 @@
 LOG_FILE="install.log"
 FIREWALLA_CONFIG_SCRIPT_DIR="/home/pi/.firewalla/config/post_main.d"
 APCUPSD_CONFIG_SCRIPT="firewalla-apcupsd.sh"
+APCUPSD_CONFIG_FILE="apcupsd.conf"
 
 echo `date` > $LOG_FILE
 
 if [ ! -d "$FIREWALLA_CONFIG_SCRIPT_DIR" ]; then
   echo "Firewalla configuration post_main.d directory does not exist... creating." >> $LOG_FILE
   mkdir -p $FIREWALLA_CONFIG_SCRIPT_DIR
+fi
+
+if [[ -f "$APCUPSD_CONFIG_FILE" ]]; then
+  echo "Copying updated configuration file to installation directory." >> $LOG_FILE
+  cp "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE" "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE.backup"
+  cp "$APCUPSD_CONFIG_FILE" "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE"
 fi
 
 if [[ -f "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_SCRIPT" ]]; then
