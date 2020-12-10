@@ -13,7 +13,13 @@ fi
 
 if [[ -f "$APCUPSD_CONFIG_FILE" ]]; then
   echo "Copying updated configuration file to installation directory." >> $LOG_FILE
-  cp "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE" "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE.backup"
+
+  # Create a backup of the file that's currently in the
+  if [[ -f "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE" ]]; then
+    echo "Moving existing $APCUPSD_CONFIG_FILE file in $FIREWALLA_CONFIG_SCRIPT_DIR aside as .backup" >> $LOG_FILE
+    cp "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE" "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE.backup"
+  fi
+
   cp "$APCUPSD_CONFIG_FILE" "$FIREWALLA_CONFIG_SCRIPT_DIR/$APCUPSD_CONFIG_FILE"
 fi
 

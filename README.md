@@ -15,8 +15,9 @@ warranty if you choose to use this software on your Firewalla Gold unit.
 ## Installation
 
 ```bash
-# SSH into your Firewalla Gold
-ssh pi@<network_gateway_ip>
+# SSH into your Firewalla Gold (specify your network gateway IP)
+# Note: Please verify that SSH is enabled for your particular network
+ssh pi@192.168.100.1 # eg. for a 192.168.100.1/24 network
 # Enter password from Firewalla app --> Settings --> Advanced --> Configurations --> SSH Console --> Tap password to reveal
 
 # Clone the repository on your Firewalla Gold
@@ -45,9 +46,24 @@ before running `install.sh` depending on your specific UPS. The settings that
 were specified were for the Back-UPS 1000VA 600W unit that I purchased
 (Model Number: BX1000M-LM60) for use with my network equipment.
 
+Essentially the `install.sh` script will copy the `firewalla-apcupsd.sh` script
+and the `apcupsd.conf` configuration file over to
+`/home/pi/.firewalla/config/post_main.d` where Firewalla allows custom scripts
+to be stored so that whenever your Firewalla Gold is restarted or updated your
+Firewalla Gold will not lose your APC UPS configuration or connection. Without
+this custom script and configuration, your Firewalla Gold effectively uninstalls
+the `apcupsd` package that's required to integrate with an APC UPS system at
+every reboot, causing the UPS to simply run until the battery is completely
+depleted, and therefore decreasing the life of the UPS' battery.
+
+Currently this project does not support running custom scripts when different
+power events are reported by the UPS, but I am open to pull requests to add
+support for that functionality and good documentation around the configuration
+and usage of the feature.
+
 ## Contributing
 
 Since everyone's configuration is different, I'm open to pull requests that
-improve the script logic and performance, but will likely not merge any PRs
-which seek to adjust the configuration specified in this project, unless it is
-in response to an `apcupsd` package update on the Firewalla Gold unit.
+improve the script logic, performance, and reliability, but will likely not
+merge any PRs seek to adjust the configuration specified in this project, unless
+it is in response to an `apcupsd` package update on the Firewalla Gold unit.
