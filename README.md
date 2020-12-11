@@ -67,3 +67,9 @@ Since everyone's configuration is different, I'm open to pull requests that
 improve the script logic, performance, and reliability, but will likely not
 merge any PRs seek to adjust the configuration specified in this project, unless
 it is in response to an `apcupsd` package update on the Firewalla Gold unit.
+
+## FAQ
+
+Q: What is the runtime of your 1000VA 600W UPS?
+
+A: On average, the display and command line show anywhere between 140-160 minutes of runtime depending on system load, but usually hovering around 146 minutes. This includes power for my Firewalla Gold, Verizon FiOS ONT network box, Netgear GS308E managed switch, ActionTec ECB6200 MoCA Adaptor, T-Mobile Line Link, and a 5V fan which is being used to provide cooling for the Firewalla Gold.
