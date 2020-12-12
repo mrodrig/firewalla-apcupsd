@@ -1,6 +1,6 @@
 #!/bin/bash
 LOG_FILE="/tmp/firewalla-apcupsd.log"
-APCUPSD_CONFIG_FILE="apcupsd.conf"
+APCUPSD_CONFIG_FILE="/home/pi/.firewalla/config/post_main.d/apcupsd.conf"
 APCUPSD_DEFAULT_FILE="/etc/default/apcupsd"
 PRESENCE_CHECK_FILE="/etc/init.d/apcupsd"
 APCUPSD_TARGET_FILE="/etc/apcupsd/apcupsd.conf"
